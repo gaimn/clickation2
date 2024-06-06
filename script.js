@@ -6,6 +6,12 @@ let score = 0;
 let pointGainPerClick = 1;
 let upgradeCost = 10;
 let ultraUpgradeCost = 500000;
+let gradualUpgradeCost = 2000;
+let pgainPerSecond = 0;
+
+const pointGainGiver = setInterval(() => {
+    pointGainPerClick += pgainPerSecond;
+}, 1000);
 
 clickButton.addEventListener("click", () => {
     score += pointGainPerClick;
@@ -40,6 +46,19 @@ ultraUpgradeButton.addEventListener("click", () => {
         clickButton.textContent = `Click for ${pointGainPerClick}`;
     } else {
         alert(`Not enough points to upgrade! Get ${ultraUpgradeCost - score} more points.`);
+    }
+});
+
+gradualPointsButton.addEventListener("click", () => {
+    if (score >= gradualUpgradeCost && timesPrestiged >= 1) {
+        score -= gradualUpgradeCost;
+        pgainPerSecond += 1; //probably not balanced, or kinda since its only 1 per second
+        scoreElement.textContent = score;
+        gradualUpgradeCost *= Math.round(Math.pow(gradualUpgradeCost,0.05)); 
+        upgradeButton.textContent = `Pointgain Generator (Cost: ${gradualUpgradeCost} + Requirement: 1 Prestige)`;
+        clickButton.textContent = `Click for ${pointGainPerClick}`;
+    } else {
+        alert(`Not enough points to upgrade! Get ${gradualUpgradeCost - score} more points.`);
     }
 });
 
