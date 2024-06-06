@@ -58,7 +58,11 @@ gradualPointsButton.addEventListener("click", () => {
         upgradeButton.textContent = `Pointgain Generator (Cost: ${gradualUpgradeCost} + Requirement: 1 Prestige)`;
         clickButton.textContent = `Click for ${pointGainPerClick}`;
     } else {
-        alert(`Not enough points to upgrade! Get ${gradualUpgradeCost - score} more points.`);
+        if (timesPrestiged >= 1) {
+            alert(`Not enough points to upgrade! Get ${gradualUpgradeCost - score} more points.`);
+        } else {
+            alert(`Prestige once to use this upgrade!`);
+        }
     }
 });
 
