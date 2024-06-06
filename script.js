@@ -5,6 +5,7 @@ const scoreElement = document.getElementById("score");
 let score = 0;
 let pointGainPerClick = 1;
 let upgradeCost = 10;
+let ultraUpgradeCost = 500000;
 
 clickButton.addEventListener("click", () => {
     score += pointGainPerClick;
@@ -18,7 +19,7 @@ upgradeButton.addEventListener("click", () => {
         scoreElement.textContent = score;
         upgradeCost *= Math.round(Math.log(upgradeCost)); 
         upgradeButton.textContent = `Upgrade (Cost: ${upgradeCost} P)`;
-      clickButton.textContent = `Click for ${pointGainPerClick}`;
+        clickButton.textContent = `Click for ${pointGainPerClick}`;
     } else {
         alert(`Not enough points to upgrade! Get ${upgradeCost - score} more points.`);
     }
@@ -28,6 +29,19 @@ upgradeButton.addEventListener("click", () => {
 const prestigeButton = document.getElementById("prestigeButton");
 let prestigeRequirement = 2500;
 let timesPrestiged = 0;
+
+ultraUpgradeButton.addEventListener("click", () => {
+    if (score >= ultraUpgradeCost) {
+        score -= ultraUpgradeCost;
+        pointGainPerClick *= math.pow(timesPrestiged,2)+100; //(prestiges^2)+100, cool right
+        scoreElement.textContent = score;
+        ultraUpgradeCost *= Math.round(Math.sqrt(ultraUpgradeCost)); 
+        upgradeButton.textContent = `Ultra Upgrade (Cost: ${ultraUpgradeCost} P)`;
+        clickButton.textContent = `Click for ${pointGainPerClick}`;
+    } else {
+        alert(`Not enough points to upgrade! Get ${ultraUpgradeCost - score} more points.`);
+    }
+});
 
 prestigeButton.addEventListener("click", () => {
     if (score >= prestigeRequirement) {
