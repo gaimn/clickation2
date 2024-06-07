@@ -1,6 +1,6 @@
 const clickButton = document.getElementById("clickButton");
 const upgradeButton = document.getElementById("upgradeButton");
-const ultraUpgradeButton = document.getElementById("ultraUpgradeButton");
+const ultraUpgradeButton = document.getElementById("ultraUpgradeButton"); //update acoustic game
 const gradualPointsButton = document.getElementById("gradualPointsButton");
 const scoreElement = document.getElementById("score");
 
