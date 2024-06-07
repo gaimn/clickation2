@@ -7,9 +7,10 @@ const scoreElement = document.getElementById("score");
 let score = 0;
 let pointGainPerClick = 1;
 let upgradeCost = 10;
-let ultraUpgradeCost = 500000;
+let ultraUpgradeCost = 50000000;
 let gradualUpgradeCost = 2000;
 let pgainPerSecond = 0;
+let prestigePGPCBoost = 1;
 
 const pointGainGiver = setInterval(() => {
     pointGainPerClick += pgainPerSecond;
@@ -57,7 +58,7 @@ gradualPointsButton.addEventListener("click", () => {
         pgainPerSecond += 1; //probably not balanced, or kinda since its only 1 per second
         scoreElement.textContent = score;
         gradualUpgradeCost *= Math.round(Math.pow(gradualUpgradeCost,0.05)); 
-        gradualPointsButton.textContent = `Pointgain Generator (Cost: ${gradualUpgradeCost} + Requirement: 1 Prestige)`;
+        gradualPointsButton.textContent = `Pointgain Generator (Cost: ${gradualUpgradeCost} P + Requirement: 1 Prestige)`;
         clickButton.textContent = `Click for ${pointGainPerClick}`;
     } else {
         if (timesPrestiged >= 1) {
@@ -76,17 +77,21 @@ prestigeButton.addEventListener("click", () => {
 
             score = 0;
             upgradeCost = 10;
-            prestigeRequirement *= prestigeRequirement;
-            timesPrestiged += 1;
-
+            pointGainPerClick = 1;
+            prestigeRequirement *= prestigeRequirement/5;
+            timesPrestiged += 1; 
+            ultraUpgradeCost = 50000000;
+            gradualUpgradeCost = 2000;
+            pgainPerSecond = 0;
+            clearInterval(automationInterval);
 
             scoreElement.textContent = score;
-            prestigeButton.textContent = ` Prestige (Cost: ${prestigeRequirement}P)`;
-            upgradeButton.textContent = `Upgrade (Cost: ${upgradeCost}P)`;
+            prestigeButton.textContent = ` Prestige (Cost: ${prestigeRequirement} P)`;
+            upgradeButton.textContent = `Upgrade (Cost: ${upgradeCost} P)`;
+            gradualPointsButton.textContent = `Pointgain Generator (Cost: ${gradualUpgradeCost} P + Requirement: 1 Prestige)`;
 
-
-            pointGainPerClick *= 5;
-
+            prestigePGPCBoost *= 5;
+            pointGainPerClick *= prestigePGPCBoost;
 
             alert("Congratulations! You've prestiged and gained a permanent x5 boost.");
         }
@@ -111,14 +116,13 @@ automationButton.addEventListener("click", () => {
 
         automationCost *= pointGainPerClick;
         automationInterval -= 50;
-        automationButton.textContent = `Automation (Cost: ${automationCost}P)`;
+        automationButton.textContent = `Automation (Cost: ${automationCost} P)`;
     } else {
         alert(`You need at least ${automationCost - score} points to purchase automation.`);
     }
 });
 
 function startAutomation() {
-
     automationInterval = setInterval(() => {
         score += pointGainPerClick; 
         scoreElement.textContent = score;
