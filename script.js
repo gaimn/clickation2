@@ -1,5 +1,7 @@
 const clickButton = document.getElementById("clickButton");
 const upgradeButton = document.getElementById("upgradeButton");
+const upgradeButton = document.getElementById("ultraUpgradeButton");
+const upgradeButton = document.getElementById("gradualPointsButton");
 const scoreElement = document.getElementById("score");
 
 let score = 0;
