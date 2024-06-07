@@ -27,7 +27,7 @@ upgradeButton.addEventListener("click", () => {
         pointGainPerClick *= 2;
         scoreElement.textContent = score;
         upgradeCost *= Math.round(Math.log(upgradeCost)); 
-        upgradeButton.textContent = `Upgrade (Cost: ${upgradeCost} P)`;
+        upgradeButton.textContent = `Upgrade (Cost: ${upgradeCost}P)`;
         clickButton.textContent = `Click for ${pointGainPerClick}`;
     } else {
         alert(`Not enough points to upgrade! Get ${upgradeCost - score} more points.`);
@@ -45,7 +45,7 @@ ultraUpgradeButton.addEventListener("click", () => { //help..?
         pointGainPerClick *= Math.pow(timesPrestiged,2)+100; //(prestiges^2)+100, cool right
         scoreElement.textContent = score;
         ultraUpgradeCost *= Math.round(Math.sqrt(ultraUpgradeCost)); 
-        ultraUpgradeButton.textContent = `Ultra Upgrade (Cost: ${ultraUpgradeCost} P)`;
+        ultraUpgradeButton.textContent = `Ultra Upgrade (Cost: ${ultraUpgradeCost}P)`;
         clickButton.textContent = `Click for ${pointGainPerClick}`;
     } else {
         alert(`Not enough points to upgrade! Get ${ultraUpgradeCost - score} more points.`);
@@ -58,7 +58,7 @@ gradualPointsButton.addEventListener("click", () => {
         pgainPerSecond += 1; //probably not balanced, or kinda since its only 1 per second
         scoreElement.textContent = score;
         gradualUpgradeCost *= Math.round(Math.pow(gradualUpgradeCost,0.05)); 
-        gradualPointsButton.textContent = `Pointgain Generator (Cost: ${gradualUpgradeCost} P + Requirement: 1 Prestige)`;
+        gradualPointsButton.textContent = `Pointgain Generator (Cost: ${gradualUpgradeCost}P + Requirement: 1 Prestige)`;
         clickButton.textContent = `Click for ${pointGainPerClick}`;
     } else {
         if (timesPrestiged >= 1) {
@@ -86,9 +86,9 @@ prestigeButton.addEventListener("click", () => {
             clearInterval(automationInterval);
 
             scoreElement.textContent = score;
-            prestigeButton.textContent = ` Prestige (Cost: ${prestigeRequirement} P)`;
-            upgradeButton.textContent = `Upgrade (Cost: ${upgradeCost} P)`;
-            gradualPointsButton.textContent = `Pointgain Generator (Cost: ${gradualUpgradeCost} P + Requirement: 1 Prestige)`;
+            prestigeButton.textContent = ` Prestige (Cost: ${prestigeRequirement}P)`;
+            upgradeButton.textContent = `Upgrade (Cost: ${upgradeCost}P)`;
+            gradualPointsButton.textContent = `Pointgain Generator (Cost: ${gradualUpgradeCost}P + Requirement: 1 Prestige)`;
 
             prestigePGPCBoost *= 5;
             pointGainPerClick *= prestigePGPCBoost;
@@ -116,7 +116,7 @@ automationButton.addEventListener("click", () => {
 
         automationCost *= pointGainPerClick;
         automationInterval -= 50;
-        automationButton.textContent = `Automation (Cost: ${automationCost} P)`;
+        automationButton.textContent = `Automation (Cost: ${automationCost}P)`;
     } else {
         alert(`You need at least ${automationCost - score} points to purchase automation.`);
     }
