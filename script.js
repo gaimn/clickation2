@@ -2,7 +2,9 @@ const clickButton = document.getElementById("clickButton");
 const upgradeButton = document.getElementById("upgradeButton");
 const ultraUpgradeButton = document.getElementById("ultraUpgradeButton"); //update acoustic game
 const gradualPointsButton = document.getElementById("gradualPointsButton");
-const scoreElement = document.getElementById("score");
+const scoreElement = document.getElementById("score"); //Score
+const autogainElement = document.getElementById("autogain"); //How many auto upgs you bought
+const pointgainElement = document.getElementById("pointgain"); //How many pointgain ups you bought
 
 let score = 0;
 let pointGainPerClick = 1;
@@ -11,6 +13,7 @@ let ultraUpgradeCost = 50000000;
 let gradualUpgradeCost = 2000;
 let pgainPerSecond = 0;
 let prestigePGPCBoost = 1;
+let autosBought = 0;
 
 const pointGainGiver = setInterval(() => {
     pointGainPerClick += pgainPerSecond;
@@ -83,9 +86,12 @@ prestigeButton.addEventListener("click", () => {
             ultraUpgradeCost = 50000000;
             gradualUpgradeCost = 2000;
             pgainPerSecond = 0;
+            autosBought = 0;
             clearInterval(automationInterval);
 
             scoreElement.textContent = score;
+            autogainElement.textContent = autosBought;
+            pointgainElement.textContent = pgainPerSecond;
             prestigeButton.textContent = ` Prestige (Cost: ${prestigeRequirement}P)`;
             upgradeButton.textContent = `Upgrade (Cost: ${upgradeCost}P)`;
             gradualPointsButton.textContent = `Pointgain Generator (Cost: ${gradualUpgradeCost}P + Requirement: 1 Prestige)`;
@@ -113,8 +119,8 @@ automationButton.addEventListener("click", () => {
 
         startAutomation();
 
-
-        automationCost *= pointGainPerClick;
+        autosBought += 1;
+        automationCost *= pointGainPerClick+3;
         automationInterval -= 50;
         automationButton.textContent = `Automation (Cost: ${automationCost}P)`;
     } else {
